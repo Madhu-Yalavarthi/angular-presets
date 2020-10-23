@@ -1,0 +1,14 @@
+<div class="page-wrapper">
+  <div class="drap-drop-wrapper">
+    <div class="left-section">
+      <div class="card-holder" *ngFor="let item of cards; let i = index" appOnDrop  draggable="false">
+        <div class="card" id="{{'card#'+i}}" appOnDrag>
+          <span>{{"card -"+item}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="card-holder" *ngFor="let item of cards; let i = index" appOnDrop draggable="false"></div>
+    </div>
+  </div>
+</div>
