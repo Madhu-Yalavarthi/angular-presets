@@ -1,0 +1,31 @@
+<!-- <div class="screen-div">
+  <div class="img-zoom-container">
+      <div class="thumb-nail-container">
+          <div #lense class="img-zoom-lens"></div>
+          <img #image [src]="(defaultImg)" class="thumb-nail" (load)="configZoomView()">
+      </div>
+      <div class="preview-container">
+          <div #overlay class="img-zoom-result"></div>
+      </div>
+  </div>
+</div> -->
+<!-- <ng-template #fetching>
+  <div class="image-loading-spinner">
+      <mat-spinner></mat-spinner>
+  </div>
+</ng-template> -->
+<h2>The portal outlet is below:</h2>
+
+<div class="example-portal-outlet">
+  <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
+</div>
+
+<button mat-button (click)="selectedPortal = componentPortal">Render component portal</button>
+<button mat-button (click)="selectedPortal = templatePortal">Render template portal</button>
+<button mat-button (click)="selectedPortal = domPortal">Render DOM portal</button>
+
+
+
+
+<ng-template #templatePortalContent>Hello, this is a template portal</ng-template>
+<div #domPortalContent>Hello, this is a DOM portal</div>
