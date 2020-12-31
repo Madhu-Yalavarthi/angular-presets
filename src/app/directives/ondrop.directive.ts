@@ -7,6 +7,15 @@ export class OnDropDirective implements AfterViewInit, OnDestroy {
 
   @Output('emitDrop') emitDrop = new EventEmitter<FileList>();
 
+  accept: boolean = true;
+
+  mutations = new MutationObserver((event) => {
+    if (event.length > 0) {
+      this.accept = false;
+      return;
+    }
+    this.accept = true;
+  })
   target;
 
   private eventListeners: (() => void)[] = [];
@@ -16,6 +25,7 @@ export class OnDropDirective implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     if (this.elementRef.nativeElement) {
       this.renderer.setAttribute(this.elementRef.nativeElement, 'draggable', 'false');
+      this.mutations.observe(this.elementRef.nativeElement, { childList: true });
       // this.eventListeners.push(this.renderer.listen(this.elementRef.nativeElement, 'dragstart', (event) => this.dragStart(event)));
       // this.eventListeners.push(this.renderer.listen(this.elementRef.nativeElement, 'dragenter', (event) => this.dragEnter(event)));
       // this.eventListeners.push(this.renderer.listen(this.elementRef.nativeElement, 'dragleave', (event) => this.dragLeave(event)));
@@ -62,8 +72,13 @@ export class OnDropDirective implements AfterViewInit, OnDestroy {
     event.preventDefault();
     var id = event.dataTransfer.getData("text");
 
-    console.log("droped---->", id)
-    if (id) this.renderer.appendChild(this.elementRef.nativeElement, document.getElementById(id));
+    console.log("droped---->", id);
+    if (!id) return;
+    let nodeCopy = document.getElementById(id).cloneNode(true);
+    // this.renderer.setProperty(nodeCopy, "id", `id`);
+    this.renderer.addClass(nodeCopy, "disable-select");
+    console.log("nodeCopy", nodeCopy);
+    if (nodeCopy && this.accept == true) this.renderer.appendChild(this.elementRef.nativeElement, nodeCopy);
     // console.log(event.dataTransfer.files);
     // this.renderer.removeClass(this.elementRef.nativeElement, 'over');
     // this.emitDrop.emit(event.dataTransfer.files);

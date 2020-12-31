@@ -1,14 +1,15 @@
 <div class="page-wrapper">
   <div class="drap-drop-wrapper">
     <div class="left-section">
-      <div class="card-holder" *ngFor="let item of cards; let i = index" appOnDrop  draggable="false">
-        <div class="card" id="{{'card#'+i}}" appOnDrag>
+        <div class="origin-cards" *ngFor="let item of cards; let i = index" id="{{'card#'+i}}" appOnDrag>
           <span>{{"card -"+item}}</span>
+          <div class="remove-icon">
+            <mat-icon>clear</mat-icon>
+          </div>
         </div>
-      </div>
     </div>
     <div class="right-section">
-      <div class="card-holder" *ngFor="let item of cards; let i = index" appOnDrop draggable="false"></div>
+      <div class="card-holder disable-select" *ngFor="let item of cards; let i = index" appOnDrop draggable="false"></div>
     </div>
   </div>
 </div>
