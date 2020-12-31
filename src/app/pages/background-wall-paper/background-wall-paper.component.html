@@ -1,10 +1,21 @@
 <div class="content-wrapper">
   <div class="container-wrapper">
     <div class="main-wrapper">
-      <div class="conent-area"></div>
+      <div class="conent-area">
+        <div class="option" *ngFor="let option of options" (click)="view = option">
+          <span>{{option}}</span>
+        </div>
+      </div>
     </div>
     <div class="background-wrapper">
-      <ul class="box-area">
+      <ul *ngIf="view == 'square' " class="square-box-area">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <ul *ngIf="view == 'explosion' " class="explosion-box-area">
         <li></li>
         <li></li>
         <li></li>

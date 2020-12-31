@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BackgroundWallPaperComponent implements OnInit {
   REACT_ICON = "assets/svg/react.svg";
+  view = "explosion";
+  options = ["square", "explosion"];
   constructor() { }
 
   ngOnInit(): void {
