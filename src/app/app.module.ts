@@ -8,20 +8,20 @@ import { CdkModule } from './cdk.module';
 import { MaterialModule } from './material.module';
 import { Dialogs } from './dialogs';
 import { Pages } from './pages';
-import { DIRECTIVES } from './directives';
+import { DirectivesModule } from './directives/directives.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     Pages,
     Dialogs,
-    DIRECTIVES
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     CdkModule,
+    DirectivesModule,
     AppRoutingModule,
   ],
   providers: [],
