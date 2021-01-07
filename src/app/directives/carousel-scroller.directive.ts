@@ -3,7 +3,8 @@ import { interval, Subscription } from 'rxjs';
 
 @Directive({ selector: '[carousel-scroll]' })
 export class CarouselScrollDirective implements AfterViewInit, OnDestroy {
-  @Input('noOfCards') noOfCards: number;
+  @Input('length') length: number;
+  @Input('noOfVisibleCards') noOfVisibleCards: number;
   @Input('activeCarousel') activeCarousel: number;
   @Input('autoScroll') autoScroll: boolean;
   @Output('emitPosition') emitPosition: EventEmitter<number> = new EventEmitter();
@@ -15,10 +16,9 @@ export class CarouselScrollDirective implements AfterViewInit, OnDestroy {
   constructor(private _element: ElementRef, private renderer: Renderer2) { }
 
   ngAfterViewInit(): void {
-    this.scrollLimitIdentify();
+    this.scrollLimit = this.length - this.noOfVisibleCards;
     if (this._element.nativeElement) {
       const { scrollLeft, clientWidth, scrollWidth, childElementCount, children } = this._element.nativeElement;
-
       this._element.nativeElement.scrollTo({ left: 0 });
       // this.eventListeners.push(this.renderer.listen(this._element.nativeElement, 'scroll', (event) => this.onScroll(event)));
       this.sub = interval(5000)
@@ -32,13 +32,6 @@ export class CarouselScrollDirective implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.sub) this.sub.unsubscribe();
-  }
-
-  scrollLimitIdentify() {
-    if (this.noOfCards === 3) this.scrollLimit = 3;
-    else if (this.noOfCards === 2) this.scrollLimit = 4;
-    else if (this.noOfCards === 1) this.scrollLimit = 5;
-    else this.scrollLimit = this.noOfCards;
   }
 
   scrollDirection() {
