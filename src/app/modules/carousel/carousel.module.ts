@@ -6,10 +6,12 @@ import { MaterialModule } from 'src/app/material.module';
 import { BasicCarouselComponent } from './basic-carousel/basic-carousel.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { DirectivesModule } from 'src/app/directives/directives.module';
+import { CarouselComponent } from './carousel.component';
 
 
 @NgModule({
   declarations: [
+    CarouselComponent,
     BasicCarouselComponent
   ],
   imports: [

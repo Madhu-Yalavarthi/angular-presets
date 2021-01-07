@@ -9,6 +9,7 @@ import { MaterialModule } from './material.module';
 import { Dialogs } from './dialogs';
 import { Pages } from './pages';
 import { DirectivesModule } from './directives/directives.module';
+import { MODULES } from './modules';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DirectivesModule } from './directives/directives.module';
     MaterialModule,
     CdkModule,
     DirectivesModule,
+    MODULES,
     AppRoutingModule,
   ],
   providers: [],

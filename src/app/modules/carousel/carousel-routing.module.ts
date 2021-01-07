@@ -8,8 +8,8 @@ const routes: Routes = [
     path: 'carousel',
     component: CarouselComponent,
     children: [
-      { path: 'basic-carousel', component: BasicCarouselComponent },
-      { path: '', redirectTo: 'basic-carousel', pathMatch: 'full' }
+      { path: 'basic', component: BasicCarouselComponent },
+      { path: '', redirectTo: 'basic', pathMatch: 'full' }
     ]
   }
 ];
