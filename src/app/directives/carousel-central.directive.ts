@@ -20,7 +20,6 @@ export class CarouselCentralScrollDirective implements AfterViewInit, OnDestroy 
       const { scrollLeft, clientWidth, scrollWidth, childElementCount, children } = this._element.nativeElement;
       const cardWidth = children[0].offsetWidth;
       this.cardSliceWidth = (cardWidth / 5) * 4;
-      console.log(cardWidth);
       this.startingCardWidth = (this.startingIndex * cardWidth) + this.cardSliceWidth;
       this._element.nativeElement.scrollTo({ left: this.startingCardWidth });
       this.sub = interval(5000)
@@ -39,6 +38,7 @@ export class CarouselCentralScrollDirective implements AfterViewInit, OnDestroy 
     const { scrollLeft, clientWidth, scrollWidth, childElementCount, children } = this._element.nativeElement;
     const cardWidth = children[0].offsetWidth;
     this.cardSliceWidth = (cardWidth / 5) * 4;
+    this.startingCardWidth = (this.startingIndex * cardWidth) + this.cardSliceWidth;
     const maxRightWidth = (cardWidth * (childElementCount - 2)) - (cardWidth / 5);
     const minLeftWidth = this.cardSliceWidth;
     if (scrollLeft >= maxRightWidth || scrollLeft <= minLeftWidth) {
