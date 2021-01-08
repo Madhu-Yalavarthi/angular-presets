@@ -21,35 +21,25 @@ export class BasicCarouselComponent implements OnInit {
 
   }
 
-  ngAfterViewInit(): void {
-
-  }
-
-  ngOnDestroy(): void {
-  }
-
-  previousCard() {
+  scrollCard(type: string) {
     if (!this.carousel.nativeElement) return;
     const { scrollWidth, scrollLeft, children } = this.carousel.nativeElement;
-    const cardWidth = children[0].offsetWidth;
-    this.carousel.nativeElement.scrollTo({ left: scrollLeft - cardWidth, behavior: 'smooth' });
-    if (this.activeCarousel !== 0) this.activeCarousel--;
+    const cardWidth = children[this.activeCarousel].offsetWidth;
+    if (type === 'PREVIOUS' && this.activeCarousel !== 0) {
+      this.activeCarousel--;
+      this.carousel.nativeElement.scrollTo({ left: (cardWidth * (this.activeCarousel + 1)) - cardWidth, behavior: 'smooth' });
+    };
+    if (type === 'NEXT' && (this.activeCarousel !== (this.cards.length - this.noOfVisibleCards))) {
+      this.carousel.nativeElement.scrollTo({ left: (cardWidth * (this.activeCarousel + 1)), behavior: 'smooth' });
+      this.activeCarousel++;
+    }
+    this.stopAutoScroll();
+  }
+
+  stopAutoScroll() {
     this.autoScroll = false;
     setTimeout(() => {
       this.autoScroll = true;
-    }, 5000);
+    }, 7000);
   }
-
-  nextCard() {
-    if (!this.carousel.nativeElement) return;
-    const { scrollWidth, scrollLeft, children } = this.carousel.nativeElement;
-    const cardWidth = children[0].offsetWidth;
-    this.carousel.nativeElement.scrollTo({ left: scrollLeft + cardWidth, behavior: 'smooth' });
-    if (this.activeCarousel !== (this.cards.length - this.noOfVisibleCards)) this.activeCarousel++;
-    this.autoScroll = false;
-    setTimeout(() => {
-      this.autoScroll = true;
-    }, 5000);
-  }
-
 }
