@@ -10,7 +10,7 @@ const routes: Routes = [
     component: CarouselComponent,
     children: [
       { path: 'basic', component: BasicCarouselComponent },
-      { path: 'central', component: CentralViewCarouselComponent },
+      { path: 'single-center', component: CentralViewCarouselComponent },
       { path: '', redirectTo: 'basic', pathMatch: 'full' }
     ]
   }

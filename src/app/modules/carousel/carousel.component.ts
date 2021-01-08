@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./carousel.component.scss']
 })
 export class CarouselComponent implements OnInit {
-  options: any[] = ["basic", "central"];
+  options: any[] = ["basic", "single-center"];
   constructor() { }
 
   ngOnInit(): void {
