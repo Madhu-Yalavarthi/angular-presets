@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CentralViewCarouselComponent implements OnInit {
   @ViewChild('carousel') carousel: ElementRef;
-  slides$: Observable<any[]>;
-  cards = ["0", "1", "2", "3", "4", "5"];
+  @Input('cards') cards: any[] = ["0", "1", "2", "3", "4", "5"];
   autoScroll: boolean = true;
   activeCarousel: number = 0;
   noOfVisibleCards: number = 1;
@@ -22,8 +21,8 @@ export class CentralViewCarouselComponent implements OnInit {
 
   scrollCard(type: string) {
     if (!this.carousel.nativeElement) return;
-    const { scrollWidth, scrollLeft, children } = this.carousel.nativeElement;
-    const lastIndex = (this.cards.length * 3) - 2;
+    const { scrollWidth, scrollLeft, children, childElementCount } = this.carousel.nativeElement;
+    const lastIndex = (childElementCount * 3) - 2;
     const cardWidth = children[0].offsetWidth;
     const cardSliceWidth = (cardWidth / 5) * 4;
     const rightWidth = (cardWidth * (this.activeCarousel + 1)) + cardSliceWidth;

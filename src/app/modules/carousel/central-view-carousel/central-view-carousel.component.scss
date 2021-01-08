@@ -12,8 +12,8 @@
   flex-direction: column;
   width: 100%;
   background-color: var(--default-background-color);
-  padding: 1em 0;
-  height: 250px;
+  padding: 2em 0;
+  // height: 295px;
 
   .carousel-indicator {
     display: flex;
@@ -21,6 +21,7 @@
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
+    padding: 0.5em;
 
     .indicator {
       border: solid 1px #ccc;
@@ -33,14 +34,11 @@
       transition: all 0.3s ease-in-out;
     }
   }
-
-
 }
 
-.carousel-card-wrapper{
+.carousel-card-wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
   box-sizing: border-box;
 
   .carousel-container {
@@ -52,8 +50,9 @@
     .carousel-card-holder {
       display: inline-block;
       position: relative;
-      height: 210px;
-      padding: 0.5em;
+      height: 286px;
+      padding: 0.5em 1em;
+      box-sizing: border-box;
       .carousel-card {
         box-sizing: border-box;
         position: relative;
@@ -63,19 +62,24 @@
         align-items: center;
         justify-content: center;
         // border: solid 1px #ccc;
-        background-color: gray;
-        border-radius: 5px;
-        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        background-color: rgb(182, 182, 182);
+        box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+          0 3px 14px 2px rgba(0, 0, 0, 0.12);
         span {
           font-size: 30px;
           font-weight: bold;
           color: #fff;
         }
       }
+      .carousel-card,
+      .brdr {
+        border-radius: 5px;
+      }
     }
   }
 
-  .scroll-left,.scroll-right{
+  .scroll-left,
+  .scroll-right {
     position: absolute;
     top: 0;
     display: flex;
@@ -84,8 +88,9 @@
     width: 140px;
     height: 100%;
     background-color: transparent;
-    .icon-holder{
-      padding: 1em;
+    cursor: pointer;
+    .icon-holder {
+      padding: 0.5em;
       background-color: rgba(0, 0, 0, 0.575);
       border-radius: 50%;
       display: flex;
@@ -110,4 +115,7 @@
   }
 }
 
-
+// .carousel,.carousel-inner,.carousel-item{
+//     width: 100%;
+//     height: 100%;
+//   }

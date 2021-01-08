@@ -14,10 +14,11 @@ export class CarouselCentralScrollDirective implements AfterViewInit, OnDestroy 
   constructor(private _element: ElementRef, private renderer: Renderer2) { }
 
   ngAfterViewInit(): void {
-    this.startingIndex = (this.length * 2) / 2 - 1;
-    this.activeCarousel = this.startingIndex;
+
     if (this._element.nativeElement) {
       const { scrollLeft, clientWidth, scrollWidth, childElementCount, children } = this._element.nativeElement;
+      this.startingIndex = (this.length * 2) / 2 - 1;
+      this.activeCarousel = this.startingIndex;
       const cardWidth = children[0].offsetWidth;
       this.cardSliceWidth = (cardWidth / 5) * 4;
       this.startingCardWidth = (this.startingIndex * cardWidth) + this.cardSliceWidth;

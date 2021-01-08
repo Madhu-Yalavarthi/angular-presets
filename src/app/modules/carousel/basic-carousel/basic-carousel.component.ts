@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -7,33 +7,33 @@ import { Observable } from 'rxjs';
   styleUrls: ['./basic-carousel.component.scss']
 })
 export class BasicCarouselComponent implements OnInit {
+  @Input('cards') cards: any[] = ["0", "1", "2", "3", "4", "5"];
+  @Input('noOfVisibleCards') noOfVisibleCards: number = 1;
+  @Input('autoScroll') autoScroll: boolean = true;
+  @Input('indicators') indicators: boolean = true;
+
   @ViewChild('carousel') carousel: ElementRef;
-  slides$: Observable<any[]>;
-  cards = ["0", "1", "2", "3", "4", "5", "6"];
-  autoScroll: boolean = true;
   activeCarousel: number = 0;
-  noOfVisibleCards: number = 3;
 
   constructor() { }
 
-
-  ngOnInit(): void {
-
+  ngOnInit() {
+    //this.slides$.subscribe(res=>console.log(res));
   }
 
   scrollCard(type: string) {
     if (!this.carousel.nativeElement) return;
-    const { scrollWidth, scrollLeft, children } = this.carousel.nativeElement;
+    const { scrollWidth, scrollLeft, children, childElementCount } = this.carousel.nativeElement;
     const cardWidth = children[this.activeCarousel].offsetWidth;
     if (type === 'PREVIOUS' && this.activeCarousel !== 0) {
       this.activeCarousel--;
       this.carousel.nativeElement.scrollTo({ left: (cardWidth * (this.activeCarousel + 1)) - cardWidth, behavior: 'smooth' });
     };
-    if (type === 'NEXT' && (this.activeCarousel !== (this.cards.length - this.noOfVisibleCards))) {
+    if (type === 'NEXT' && (this.activeCarousel !== (childElementCount - this.noOfVisibleCards))) {
       this.carousel.nativeElement.scrollTo({ left: (cardWidth * (this.activeCarousel + 1)), behavior: 'smooth' });
       this.activeCarousel++;
     }
-    this.stopAutoScroll();
+    if (this.autoScroll) this.stopAutoScroll();
   }
 
   stopAutoScroll() {
