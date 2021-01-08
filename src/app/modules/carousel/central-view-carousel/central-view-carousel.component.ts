@@ -12,7 +12,7 @@ export class CentralViewCarouselComponent implements OnInit {
   cards = ["0", "1", "2", "3", "4", "5"];
   autoScroll: boolean = true;
   activeCarousel: number = 0;
-  noOfVisibleCards: number = 2;
+  noOfVisibleCards: number = 1;
 
   constructor() { }
 
@@ -23,13 +23,17 @@ export class CentralViewCarouselComponent implements OnInit {
   scrollCard(type: string) {
     if (!this.carousel.nativeElement) return;
     const { scrollWidth, scrollLeft, children } = this.carousel.nativeElement;
-    const cardWidth = children[this.activeCarousel].offsetWidth;
+    const lastIndex = (this.cards.length * 3) - 2;
+    const cardWidth = children[0].offsetWidth;
+    const cardSliceWidth = (cardWidth / 5) * 4;
+    const rightWidth = (cardWidth * (this.activeCarousel + 1)) + cardSliceWidth;
+    const leftWidth = (cardWidth * (this.activeCarousel - 1)) + cardSliceWidth;
     if (type === 'PREVIOUS' && this.activeCarousel !== 0) {
       this.activeCarousel--;
-      this.carousel.nativeElement.scrollTo({ left: ((cardWidth * (this.activeCarousel + 1)) - (cardWidth/2)), behavior: 'smooth' });
+      this.carousel.nativeElement.scrollTo({ left: leftWidth, behavior: 'smooth' });
     };
-    if (type === 'NEXT' && (this.activeCarousel !== ((this.cards.length * 3) - 2))) {
-      this.carousel.nativeElement.scrollTo({ left: ((cardWidth * (this.activeCarousel + 1)) + (cardWidth / 2)), behavior: 'smooth' });
+    if (type === 'NEXT' && (this.activeCarousel !== lastIndex)) {
+      this.carousel.nativeElement.scrollTo({ left: rightWidth, behavior: 'smooth' });
       this.activeCarousel++;
     }
     this.stopAutoScroll();

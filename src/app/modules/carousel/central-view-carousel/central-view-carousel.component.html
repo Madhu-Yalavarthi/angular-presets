@@ -2,22 +2,21 @@
   <div class="carousel-wrapper">
     <div class="carousel-card-wrapper">
       <div #carousel class="carousel-container" carousel-central-scroll [length]="cards.length"
-        [noOfVisibleCards]="noOfVisibleCards" [autoScroll]="autoScroll" [activeCarousel]="activeCarousel"
-        (emitPosition)="activeCarousel = $event">
+        [autoScroll]="autoScroll" [activeCarousel]="activeCarousel" (emitPosition)="activeCarousel = $event">
         <div class="carousel-card-holder" *ngFor="let card of cards"
-          [ngStyle]="{'width': 'calc(100%/'+noOfVisibleCards+')'}">
+          [ngStyle]="{'width': 'calc(70%/'+noOfVisibleCards+')'}">
           <div class="carousel-card">
             <span>{{card}}</span>
           </div>
         </div>
         <div class="carousel-card-holder" *ngFor="let card of cards"
-          [ngStyle]="{'width': 'calc(100%/'+noOfVisibleCards+')'}">
+          [ngStyle]="{'width': 'calc(70%/'+noOfVisibleCards+')'}">
           <div class="carousel-card">
             <span>{{card}}</span>
           </div>
         </div>
         <div class="carousel-card-holder" *ngFor="let card of cards"
-          [ngStyle]="{'width': 'calc(100%/'+noOfVisibleCards+')'}">
+          [ngStyle]="{'width': 'calc(70%/'+noOfVisibleCards+')'}">
           <div class="carousel-card">
             <span>{{card}}</span>
           </div>
