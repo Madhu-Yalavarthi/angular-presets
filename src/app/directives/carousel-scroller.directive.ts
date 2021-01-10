@@ -3,10 +3,11 @@ import { interval, Subscription } from 'rxjs';
 
 @Directive({ selector: '[carousel-scroll]' })
 export class CarouselScrollDirective implements AfterViewInit, OnDestroy {
-  @Input('noOfVisibleCards') noOfVisibleCards: number;
-  @Input('activeCarousel') activeCarousel: number;
+  @Input('activeIndex') activeIndex: number;
   @Input('autoScroll') autoScroll: boolean;
   @Output('emitPosition') emitPosition: EventEmitter<number> = new EventEmitter();
+  @Output('emitVisibleCards') emitVisibleCards: EventEmitter<number> = new EventEmitter();
+  visibleCards: number;
   scrollLimit: number;
   scrollOrientation: string = 'RIGHT';
   sub: Subscription;
@@ -15,7 +16,10 @@ export class CarouselScrollDirective implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     if (!this._element.nativeElement) return;
     const { scrollLeft, clientWidth, scrollWidth, childElementCount, children } = this._element.nativeElement;
-    this.scrollLimit = childElementCount - this.noOfVisibleCards;
+    const cardWidth = children[0].offsetWidth;
+    this.visibleCards = Math.round(clientWidth / cardWidth);
+    console.log(clientWidth / cardWidth, this.visibleCards, childElementCount);
+    this.scrollLimit = childElementCount - this.visibleCards;
     this._element.nativeElement.scrollTo({ left: 0 });
     if (this.autoScroll) this.initiateAutoScroll();
   }
@@ -32,22 +36,24 @@ export class CarouselScrollDirective implements AfterViewInit, OnDestroy {
   }
 
   scrollDirection() {
-    if (this.scrollOrientation === "RIGHT" && this.activeCarousel === this.scrollLimit) {
+    const { clientWidth, scrollLeft, childElementCount, children } = this._element.nativeElement;
+    const cardWidth = children[0].offsetWidth;
+    this.visibleCards = Math.ceil(clientWidth / cardWidth);
+    if (this.scrollOrientation === "RIGHT" && this.activeIndex === this.scrollLimit) {
       this.scrollOrientation = "LEFT";
-    } else if (this.scrollOrientation === "LEFT" && this.activeCarousel === 0) {
+    } else if (this.scrollOrientation === "LEFT" && this.activeIndex === 0) {
       this.scrollOrientation = "RIGHT";
     }
-    if (this.scrollOrientation === "RIGHT") this.activeCarousel++;
-    else this.activeCarousel--;
-    this.startScrolling(this.activeCarousel);
-  }
-
-  startScrolling(counter: number) {
-    this.emitPosition.emit(counter);
-    const { scrollWidth, scrollLeft, childElementCount, children } = this._element.nativeElement;
-    const cardWidth = children[0].offsetWidth;
-    if (this.scrollOrientation === "LEFT") this._element.nativeElement.scrollTo({ left: scrollLeft - cardWidth, behavior: 'smooth' });
-    if (this.scrollOrientation === "RIGHT") this._element.nativeElement.scrollTo({ left: scrollLeft + cardWidth, behavior: 'smooth' });
-
+    if (this.scrollOrientation === "RIGHT") {
+      this._element.nativeElement.scrollTo({ left: (cardWidth * this.activeIndex) + cardWidth, behavior: 'smooth' });
+      this.activeIndex++;
+    }
+    else {
+      this._element.nativeElement.scrollTo({ left: (cardWidth * this.activeIndex) - cardWidth, behavior: 'smooth' });
+      this.activeIndex--;
+    }
+    // this.startScrolling(this.activeIndex);
+    this.emitPosition.emit(this.activeIndex);
+    this.emitVisibleCards.emit(this.visibleCards);
   }
 }

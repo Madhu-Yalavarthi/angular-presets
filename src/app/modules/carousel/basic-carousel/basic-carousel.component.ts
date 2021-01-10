@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class BasicCarouselComponent implements OnInit {
   @Input('cards') cards: any[] = ["0", "1", "2", "3", "4", "5"];
-  @Input('noOfVisibleCards') noOfVisibleCards: number = 1;
   @Input('autoScroll') autoScroll: boolean = true;
   @Input('indicators') indicators: boolean = true;
 
   @ViewChild('carousel') carousel: ElementRef;
-  activeCarousel: number = 0;
+  activeIndex: number = 0;
+  visibleCards: number;
+  noOfVisibleCards: number = 5;
 
   constructor() { }
 
@@ -24,14 +25,15 @@ export class BasicCarouselComponent implements OnInit {
   scrollCard(type: string) {
     if (!this.carousel.nativeElement) return;
     const { scrollWidth, scrollLeft, children, childElementCount } = this.carousel.nativeElement;
-    const cardWidth = children[this.activeCarousel].offsetWidth;
-    if (type === 'PREVIOUS' && this.activeCarousel !== 0) {
-      this.activeCarousel--;
-      this.carousel.nativeElement.scrollTo({ left: (cardWidth * (this.activeCarousel + 1)) - cardWidth, behavior: 'smooth' });
+    const cardWidth = children[0].offsetWidth;
+    if (type === 'PREVIOUS' && this.activeIndex !== 0) {
+      this.carousel.nativeElement.scrollTo({ left: (cardWidth * this.activeIndex) - cardWidth, behavior: 'smooth' });
+      this.activeIndex--;
     };
-    if (type === 'NEXT' && (this.activeCarousel !== (childElementCount - this.noOfVisibleCards))) {
-      this.carousel.nativeElement.scrollTo({ left: (cardWidth * (this.activeCarousel + 1)), behavior: 'smooth' });
-      this.activeCarousel++;
+    if (type === 'NEXT' && (this.activeIndex !== (childElementCount - this.visibleCards))) {
+
+      this.activeIndex++;
+      this.carousel.nativeElement.scrollTo({ left: (cardWidth * this.activeIndex), behavior: 'smooth' });
     }
     if (this.autoScroll) this.stopAutoScroll();
   }
@@ -41,5 +43,15 @@ export class BasicCarouselComponent implements OnInit {
     setTimeout(() => {
       this.autoScroll = true;
     }, 7000);
+  }
+
+  showRightArrow(clientWidth: number, cardWidth: number, childElementCount: number): boolean {
+    const visibleCards = this.calculateVisibleCards(clientWidth, cardWidth);
+    if (!visibleCards || visibleCards > childElementCount) return false;
+    return (this.activeIndex !== (childElementCount - visibleCards)) && (childElementCount > visibleCards);
+  }
+
+  calculateVisibleCards(clientWidth: number, cardWidth: number) {
+    return Math.round(clientWidth / cardWidth);
   }
 }
