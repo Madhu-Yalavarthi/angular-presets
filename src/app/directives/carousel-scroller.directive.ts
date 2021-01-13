@@ -39,6 +39,7 @@ export class CarouselScrollDirective implements AfterViewInit, OnDestroy {
     const { clientWidth, scrollLeft, childElementCount, children } = this._element.nativeElement;
     const cardWidth = children[0].offsetWidth;
     this.visibleCards = Math.ceil(clientWidth / cardWidth);
+    this.scrollLimit = childElementCount - this.visibleCards;
     if (this.scrollOrientation === "RIGHT" && this.activeIndex === this.scrollLimit) {
       this.scrollOrientation = "LEFT";
     } else if (this.scrollOrientation === "LEFT" && this.activeIndex === 0) {
