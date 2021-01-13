@@ -10,13 +10,14 @@ export class CentralViewCarouselComponent implements OnInit {
   @ViewChild('carousel') carousel: ElementRef;
   @Input('cards') cards: any[] = ["0", "1", "2", "3", "4", "5"];
   autoScroll: boolean = true;
-  activeCarousel: number = 0;
+  activeIndex: number = 0;
   noOfVisibleCards: number = 1;
 
   constructor() { }
 
 
   ngOnInit(): void {
+    this.activeIndex = ((this.cards.length * 3) / 3) - 1;
   }
 
   scrollCard(type: string) {
@@ -25,15 +26,15 @@ export class CentralViewCarouselComponent implements OnInit {
     const lastIndex = (childElementCount * 3) - 2;
     const cardWidth = children[0].offsetWidth;
     const cardSliceWidth = (cardWidth / 5) * 4;
-    const rightWidth = (cardWidth * (this.activeCarousel + 1)) + cardSliceWidth;
-    const leftWidth = (cardWidth * (this.activeCarousel - 1)) + cardSliceWidth;
-    if (type === 'PREVIOUS' && this.activeCarousel !== 0) {
-      this.activeCarousel--;
+    const rightWidth = (cardWidth * (this.activeIndex + 1)) + cardSliceWidth;
+    const leftWidth = (cardWidth * (this.activeIndex - 1)) + cardSliceWidth;
+    if (type === 'PREVIOUS' && this.activeIndex !== 0) {
+      this.activeIndex--;
       this.carousel.nativeElement.scrollTo({ left: leftWidth, behavior: 'smooth' });
     };
-    if (type === 'NEXT' && (this.activeCarousel !== lastIndex)) {
+    if (type === 'NEXT' && (this.activeIndex !== lastIndex)) {
       this.carousel.nativeElement.scrollTo({ left: rightWidth, behavior: 'smooth' });
-      this.activeCarousel++;
+      this.activeIndex++;
     }
     this.stopAutoScroll();
   }

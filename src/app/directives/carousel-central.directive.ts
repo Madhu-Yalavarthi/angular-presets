@@ -3,8 +3,7 @@ import { interval, Subscription } from 'rxjs';
 
 @Directive({ selector: '[carousel-central-scroll]' })
 export class CarouselCentralScrollDirective implements AfterViewInit, OnDestroy {
-  @Input('length') length: number;
-  @Input('activeCarousel') activeCarousel: number;
+  @Input('activeIndex') activeIndex: number;
   @Input('autoScroll') autoScroll: boolean;
   @Output('emitPosition') emitPosition: EventEmitter<number> = new EventEmitter();
   startingCardWidth: number;
@@ -17,8 +16,10 @@ export class CarouselCentralScrollDirective implements AfterViewInit, OnDestroy 
 
     if (this._element.nativeElement) {
       const { scrollLeft, clientWidth, scrollWidth, childElementCount, children } = this._element.nativeElement;
-      this.startingIndex = (this.length * 2) / 2 - 1;
-      this.activeCarousel = this.startingIndex;
+
+      this.startingIndex = (childElementCount / 3) - 1;
+      console.log(childElementCount, this.startingIndex);
+      this.activeIndex = this.startingIndex;
       const cardWidth = children[0].offsetWidth;
       this.cardSliceWidth = (cardWidth / 5) * 4;
       this.startingCardWidth = (this.startingIndex * cardWidth) + this.cardSliceWidth;
@@ -44,12 +45,12 @@ export class CarouselCentralScrollDirective implements AfterViewInit, OnDestroy 
     const minLeftWidth = this.cardSliceWidth;
     if (scrollLeft >= maxRightWidth || scrollLeft <= minLeftWidth) {
       this._element.nativeElement.scrollTo({ left: this.startingCardWidth, behavior: 'smooth' });
-      this.activeCarousel = this.startingIndex;
-      this.emitPosition.emit(this.activeCarousel);
+      this.activeIndex = this.startingIndex;
+      this.emitPosition.emit(this.activeIndex);
       return;
     }
-    this.activeCarousel++;
-    this.emitPosition.emit(this.activeCarousel);
-    this._element.nativeElement.scrollTo({ left: ((cardWidth * this.activeCarousel) + this.cardSliceWidth), behavior: 'smooth' });
+    this.activeIndex++;
+    this.emitPosition.emit(this.activeIndex);
+    this._element.nativeElement.scrollTo({ left: ((cardWidth * this.activeIndex) + this.cardSliceWidth), behavior: 'smooth' });
   }
 }
