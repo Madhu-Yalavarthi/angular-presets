@@ -1,27 +1,32 @@
 <div class="home-wrapper">
-  <div class="carousel-wrapper">
+  <div class="carousel-wrapper" *ngIf="cards">
     <div class="carousel-card-wrapper">
-      <div #carousel class="carousel-container" carousel-scroll [noOfCards]="noOfCards" [autoScroll]="autoScroll" [activeCarousel]="activeCarousel" (emitPosition)="activeCarousel = $event">
-        <div class="carousel-card-holder" *ngFor="let card of cards" [ngStyle]="{'width': 'calc(100%/'+noOfCards+')'}">
+      <div #carousel class="carousel-container" carousel-scroll [autoScroll]="autoScroll" [activeIndex]="activeIndex"
+      (emitVisibleCards)="visibleCards = $event" (emitPosition)="activeIndex = $event">
+        <div class="carousel-card-holder" *ngFor="let card of cards"
+          [ngStyle]="{'width': 'calc(100%/'+noOfVisibleCards+')'}">
           <div class="carousel-card">
             <span>{{card}}</span>
           </div>
         </div>
       </div>
-      <div class="scroll-left">
-        <div class="icon-holder" (click)="previousCard()">
-          <mat-icon>navigate_before</mat-icon>
-        </div>
-      </div>
-      <div class="scroll-right">
-        <div class="icon-holder" (click)="nextCard()">
-          <mat-icon>navigate_next</mat-icon>
-        </div>
+      <div class="scroll-left" (click)="scrollCard('PREVIOUS')" *ngIf="activeIndex !== 0"
+      [ngStyle]="{'width':'calc('+carousel.children[0].offsetWidth+'/2)'}">
+      <div class="icon-holder">
+        <mat-icon>navigate_before</mat-icon>
       </div>
     </div>
-    <div class="carousel-indicator">
-      <div class="indicator" *ngFor="let indicator of getIndicatorsLength(noOfCards, cards.length) | fill"
-        [ngStyle]="{'background-color': indicator === activeCarousel ? 'green': null }"></div>
+    <div class="scroll-right"
+      *ngIf="showRightArrow(carousel.clientWidth, carousel.children[0].offsetWidth, carousel.childElementCount)"
+      (click)="scrollCard('NEXT')" [ngStyle]="{'width':'calc('+carousel.children[0].offsetWidth+'/2)'}">
+      <div class="icon-holder">
+        <mat-icon>navigate_next</mat-icon>
+      </div>
     </div>
+  </div>
+  <div class="carousel-indicator" *ngIf="indicators">
+    <div class="indicator"
+      *ngFor="let indicator of (carousel.childElementCount - calculateVisibleCards(carousel.clientWidth, carousel.children[0].offsetWidth)) | fill"
+      [ngStyle]="{'background-color': indicator === activeIndex ? 'gray': null }"></div>
   </div>
 </div>

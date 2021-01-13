@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -7,57 +7,51 @@ import { Observable } from 'rxjs';
   styleUrls: ['./basic-carousel.component.scss']
 })
 export class BasicCarouselComponent implements OnInit {
+  @Input('cards') cards: any[] = ["0", "1", "2", "3", "4", "5"];
+  @Input('autoScroll') autoScroll: boolean = true;
+  @Input('indicators') indicators: boolean = true;
+
   @ViewChild('carousel') carousel: ElementRef;
-  slides$: Observable<any[]>;
-  cards = ["1", "2", "3", "4", "5", "6"];
-  autoScroll: boolean = true;
-  activeCarousel: number = 0;
-  noOfCards: number = 3;
+  activeIndex: number = 0;
+  visibleCards: number;
+  noOfVisibleCards: number = 5;
 
   constructor() { }
 
-
-  ngOnInit(): void {
+  ngOnInit() {
+    //this.slides$.subscribe(res=>console.log(res));
   }
 
-  ngAfterViewInit(): void {
-
-  }
-
-  ngOnDestroy(): void {
-  }
-
-  previousCard() {
+  scrollCard(type: string) {
     if (!this.carousel.nativeElement) return;
-    const { scrollWidth, scrollLeft, children } = this.carousel.nativeElement;
+    const { scrollWidth, scrollLeft, children, childElementCount } = this.carousel.nativeElement;
     const cardWidth = children[0].offsetWidth;
-    this.carousel.nativeElement.scrollTo({ left: scrollLeft - cardWidth, behavior: 'smooth' });
-    if (this.activeCarousel !== 0) this.activeCarousel--;
-    this.autoScroll = false;
-    setTimeout(() =>{
-      this.autoScroll = true;
-    }, 10000);
-  }
+    if (type === 'PREVIOUS' && this.activeIndex !== 0) {
+      this.carousel.nativeElement.scrollTo({ left: (cardWidth * this.activeIndex) - cardWidth, behavior: 'smooth' });
+      this.activeIndex--;
+    };
+    if (type === 'NEXT' && (this.activeIndex !== (childElementCount - this.visibleCards))) {
 
-  nextCard() {
-    if (!this.carousel.nativeElement) return;
-    const { scrollWidth, scrollLeft, children } = this.carousel.nativeElement;
-    const cardWidth = children[0].offsetWidth;
-    this.carousel.nativeElement.scrollTo({ left: scrollLeft + cardWidth, behavior: 'smooth' });
-    if (this.activeCarousel !== this.getIndicatorsLength(this.noOfCards, this.cards.length)) this.activeCarousel++;
-    this.autoScroll = false;
-    setTimeout(() =>{
-      this.autoScroll = true;
-    }, 10000);
-  }
-
-  getIndicatorsLength(visibleCards: number, cardsLength?: number) {
-    switch (visibleCards) {
-      case 1: return 6;
-      case 2: return 5;
-      case 3: return 4;
-      default: return cardsLength;
+      this.activeIndex++;
+      this.carousel.nativeElement.scrollTo({ left: (cardWidth * this.activeIndex), behavior: 'smooth' });
     }
+    if (this.autoScroll) this.stopAutoScroll();
   }
 
+  stopAutoScroll() {
+    this.autoScroll = false;
+    setTimeout(() => {
+      this.autoScroll = true;
+    }, 7000);
+  }
+
+  showRightArrow(clientWidth: number, cardWidth: number, childElementCount: number): boolean {
+    const visibleCards = this.calculateVisibleCards(clientWidth, cardWidth);
+    if (!visibleCards || visibleCards > childElementCount) return false;
+    return (this.activeIndex !== (childElementCount - visibleCards)) && (childElementCount > visibleCards);
+  }
+
+  calculateVisibleCards(clientWidth: number, cardWidth: number) {
+    return Math.round(clientWidth / cardWidth);
+  }
 }

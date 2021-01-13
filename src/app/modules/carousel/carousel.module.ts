@@ -7,12 +7,14 @@ import { BasicCarouselComponent } from './basic-carousel/basic-carousel.componen
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { CarouselComponent } from './carousel.component';
+import { CentralViewCarouselComponent } from './central-view-carousel/central-view-carousel.component';
 
 
 @NgModule({
   declarations: [
     CarouselComponent,
-    BasicCarouselComponent
+    BasicCarouselComponent,
+    CentralViewCarouselComponent
   ],
   imports: [
     CommonModule,

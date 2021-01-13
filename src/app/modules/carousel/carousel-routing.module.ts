@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BasicCarouselComponent } from './basic-carousel/basic-carousel.component';
 import { CarouselComponent } from './carousel.component';
+import { CentralViewCarouselComponent } from './central-view-carousel/central-view-carousel.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,7 @@ const routes: Routes = [
     component: CarouselComponent,
     children: [
       { path: 'basic', component: BasicCarouselComponent },
+      { path: 'single-center', component: CentralViewCarouselComponent },
       { path: '', redirectTo: 'basic', pathMatch: 'full' }
     ]
   }

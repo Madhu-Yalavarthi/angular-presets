@@ -1,0 +1,41 @@
+<div class="home-wrapper">
+  <div class="carousel-wrapper">
+    <div class="carousel-card-wrapper">
+      <div #carousel class="carousel-container" carousel-central-scroll [length]="cards.length"
+        [autoScroll]="autoScroll" [activeCarousel]="activeCarousel" (emitPosition)="activeCarousel = $event">
+        <div class="carousel-card-holder" *ngFor="let card of cards"
+          [ngStyle]="{'width': 'calc(70%/'+noOfVisibleCards+')'}">
+          <div class="carousel-card">
+            <span>{{card}}</span>
+          </div>
+        </div>
+        <div class="carousel-card-holder" *ngFor="let card of cards"
+          [ngStyle]="{'width': 'calc(70%/'+noOfVisibleCards+')'}">
+          <div class="carousel-card">
+            <span>{{card}}</span>
+          </div>
+        </div>
+        <div class="carousel-card-holder" *ngFor="let card of cards"
+          [ngStyle]="{'width': 'calc(70%/'+noOfVisibleCards+')'}">
+          <div class="carousel-card">
+            <span>{{card}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-left">
+        <div class="icon-holder" (click)="scrollCard('PREVIOUS')">
+          <mat-icon>navigate_before</mat-icon>
+        </div>
+      </div>
+      <div class="scroll-right">
+        <div class="icon-holder" (click)="scrollCard('NEXT')">
+          <mat-icon>navigate_next</mat-icon>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="carousel-indicator">
+      <div class="indicator" *ngFor="let indicator of (cards.length - 1) | fill"
+        [ngStyle]="{'background-color': indicator === activeCarousel ? 'gray': null }"></div>
+    </div> -->
+  </div>
+</div>
