@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./media-viewer.component.scss']
 })
 export class MediaViewerComponent implements OnInit {
-  options: any[] = [{ name: 'Zoom Viewer', route: 'zoom-viewer' }]
+  options: any[] = [
+    { name: 'Fixed Viewer', route: '/media-viewer/zoom-viewer' },
+    { name: 'Amazon Viewer', route: '/media-viewer/amazon-viewer' }
+  ]
   constructor() { }
 
   ngOnInit(): void {

@@ -1,8 +1,8 @@
 <div class="home-wrapper">
   <div class="carousel-wrapper">
     <div class="carousel-card-wrapper">
-      <div #carousel class="carousel-container" carousel-central-scroll [length]="cards.length"
-        [autoScroll]="autoScroll" [activeCarousel]="activeCarousel" (emitPosition)="activeCarousel = $event">
+      <div #carousel class="carousel-container" carousel-central-scroll [autoScroll]="autoScroll"
+        [activeIndex]="activeIndex" (emitPosition)="activeIndex = $event">
         <div class="carousel-card-holder" *ngFor="let card of cards"
           [ngStyle]="{'width': 'calc(70%/'+noOfVisibleCards+')'}">
           <div class="carousel-card">
@@ -35,7 +35,7 @@
     </div>
     <!-- <div class="carousel-indicator">
       <div class="indicator" *ngFor="let indicator of (cards.length - 1) | fill"
-        [ngStyle]="{'background-color': indicator === activeCarousel ? 'gray': null }"></div>
+        [ngStyle]="{'background-color': indicator === activeIndex ? 'gray': null }"></div>
     </div> -->
   </div>
 </div>

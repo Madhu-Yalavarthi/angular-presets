@@ -18,7 +18,7 @@ export class CarouselScrollDirective implements AfterViewInit, OnDestroy {
     const { scrollLeft, clientWidth, scrollWidth, childElementCount, children } = this._element.nativeElement;
     const cardWidth = children[0].offsetWidth;
     this.visibleCards = Math.round(clientWidth / cardWidth);
-    console.log(clientWidth / cardWidth, this.visibleCards, childElementCount);
+    // console.log(clientWidth / cardWidth, this.visibleCards, childElementCount);
     this.scrollLimit = childElementCount - this.visibleCards;
     this._element.nativeElement.scrollTo({ left: 0 });
     if (this.autoScroll) this.initiateAutoScroll();
@@ -38,8 +38,9 @@ export class CarouselScrollDirective implements AfterViewInit, OnDestroy {
   scrollDirection() {
     const { clientWidth, scrollLeft, childElementCount, children } = this._element.nativeElement;
     const cardWidth = children[0].offsetWidth;
-    this.visibleCards = Math.ceil(clientWidth / cardWidth);
+    this.visibleCards = Math.round(clientWidth / cardWidth);
     this.scrollLimit = childElementCount - this.visibleCards;
+    console.log(childElementCount, this.visibleCards, this.scrollLimit);
     if (this.scrollOrientation === "RIGHT" && this.activeIndex === this.scrollLimit) {
       this.scrollOrientation = "LEFT";
     } else if (this.scrollOrientation === "LEFT" && this.activeIndex === 0) {
