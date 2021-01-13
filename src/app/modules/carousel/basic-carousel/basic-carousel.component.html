@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="scroll-right"
-      *ngIf="showRightArrow(carousel.clientWidth, carousel.children[0].offsetWidth, carousel.childElementCount)"
+      *ngIf="(activeIndex !== (carousel.childElementCount - visibleCards)) && (carousel.childElementCount > visibleCards)"
       (click)="scrollCard('NEXT')" [ngStyle]="{'width':'calc('+carousel.children[0].offsetWidth+'/2)'}">
       <div class="icon-holder">
         <mat-icon>navigate_next</mat-icon>
