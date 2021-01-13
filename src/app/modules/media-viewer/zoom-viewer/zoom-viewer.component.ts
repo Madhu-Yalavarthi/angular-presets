@@ -9,7 +9,7 @@ import { AfterViewInit, ApplicationRef, Component, OnInit, ComponentFactoryResol
 })
 export class ZoomViewerComponent implements OnInit {
 
-  defaultImg = "assets/temp-img/profile.jpg";
+  defaultImg = "assets/temp-img/background.jpg";
 
 
   @ViewChild('image', { static: false }) image: ElementRef;

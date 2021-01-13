@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./drag-drop.component.scss']
 })
 export class DragDropComponent implements OnInit {
-  options: any[] = [{ name: 'Card Drop', route: 'card-drop' }]
+  options: any[] = [{ name: 'Card Drop', route: '/drag-drop/card-drop' }]
   constructor() { }
 
   ngOnInit(): void {
