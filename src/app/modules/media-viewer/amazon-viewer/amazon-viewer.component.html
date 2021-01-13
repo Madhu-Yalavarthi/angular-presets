@@ -1,1 +1,12 @@
-<p>amazon-viewer works!</p>
+<div class="screen-div">
+  <div class="img-zoom-container">
+    <div #imageHolder class="thumb-nail-container">
+      <div #lense class="img-zoom-lens"></div>
+      <img #image [src]="(defaultImg)" class="thumb-nail">
+    </div>
+
+  </div>
+  <div #overlayHolder class="preview-container">
+    <div #overlay class="img-zoom-result"></div>
+  </div>
+</div>
