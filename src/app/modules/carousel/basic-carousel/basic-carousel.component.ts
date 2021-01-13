@@ -14,7 +14,6 @@ export class BasicCarouselComponent implements OnInit {
   @ViewChild('carousel') carousel: ElementRef;
   activeIndex: number = 0;
   visibleCards: number;
-  noOfVisibleCards: number = 5;
 
   constructor() { }
 
@@ -46,9 +45,9 @@ export class BasicCarouselComponent implements OnInit {
   }
 
   showRightArrow(clientWidth: number, cardWidth: number, childElementCount: number): boolean {
-    const visibleCards = this.calculateVisibleCards(clientWidth, cardWidth);
-    if (!visibleCards || visibleCards > childElementCount) return false;
-    return (this.activeIndex !== (childElementCount - visibleCards)) && (childElementCount > visibleCards);
+    this.visibleCards = this.calculateVisibleCards(clientWidth, cardWidth);
+    if (!this.visibleCards || this.visibleCards > childElementCount) return false;
+    return (this.activeIndex !== (childElementCount - this.visibleCards)) && (childElementCount > this.visibleCards);
   }
 
   calculateVisibleCards(clientWidth: number, cardWidth: number) {

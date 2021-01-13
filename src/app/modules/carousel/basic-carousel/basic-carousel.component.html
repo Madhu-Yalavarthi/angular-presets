@@ -4,7 +4,7 @@
       <div #carousel class="carousel-container" carousel-scroll [autoScroll]="autoScroll" [activeIndex]="activeIndex"
       (emitVisibleCards)="visibleCards = $event" (emitPosition)="activeIndex = $event">
         <div class="carousel-card-holder" *ngFor="let card of cards"
-          [ngStyle]="{'width': 'calc(100%/'+noOfVisibleCards+')'}">
+          [ngStyle]="{'width': '234px'}">
           <div class="carousel-card">
             <span>{{card}}</span>
           </div>

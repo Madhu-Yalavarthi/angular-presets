@@ -1,10 +1,7 @@
 import { Portal, ComponentPortal, TemplatePortal, DomPortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, ApplicationRef, Component, OnInit, ComponentFactoryResolver, ElementRef, Inject, Injector, Input, OnDestroy, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
-import { NotificationComponent } from 'src/app/dialogs/notification/notification.component';
-import { ZoomedImageComponent } from '../../dialogs/zoomed-image/zoomed-image.component';
+
 @Component({
   selector: 'app-zoom-viewer',
   templateUrl: './zoom-viewer.component.html',
