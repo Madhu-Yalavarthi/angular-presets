@@ -24,8 +24,12 @@
   position: absolute;
   top: 0;
   left: 317px;
-  width: 500px;
+  width: 50%;
   height: 400px;
+}
+
+.thumb-nail {
+  width: 265px;
 }
 
 .img-zoom-lens {
@@ -41,7 +45,7 @@
 
 .thumb-nail,
 .img-zoom-result {
-  width: 260px;
+  min-width: 260px;
   min-height: 275px;
 }
 
