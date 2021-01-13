@@ -1,0 +1,7 @@
+<div class="app-wrapper">
+  <div class="app-container">
+    <a class="option" *ngFor="let option of options" [routerLink]="option.route">
+      <span>{{option.name}}</span>
+    </a>
+  </div>
+</div>
