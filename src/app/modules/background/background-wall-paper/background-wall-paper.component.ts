@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BackgroundWallPaperComponent implements OnInit {
   REACT_ICON = "assets/svg/react.svg";
-  view = "waves";
+  view = "square";
   options = ["square", "bubbles", "waves"];
   constructor() { }
 
