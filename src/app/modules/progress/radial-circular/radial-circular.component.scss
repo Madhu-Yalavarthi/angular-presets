@@ -38,8 +38,8 @@
 			box-shadow: $shadow inset;
 		}
 		.mask, .fill {
-			-webkit-backface-visibility: hidden;
-			transition: -webkit-transform $transition-length;
+			backface-visibility: hidden;
+			transition: transform $transition-length;
 			transition: -ms-transform $transition-length;
 			transition: transform $transition-length;
 			border-radius: 50%;
@@ -73,14 +73,14 @@
 
 			line-height: 1;
 			.numbers {
-				margin-top: -$percentage-font-size;
+				// margin-top: -$percentage-font-size;
 				transition: width $transition-length;
 				span {
 					width: $percentage-text-width;
 					display: inline-block;
 					vertical-align: top;
 					text-align: center;
-					font-weight: 800;
+					font-weight: 500;
 					font-size: $percentage-font-size;
 					/*font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
 					color: $percentage-color;
@@ -104,9 +104,9 @@
 					transform: rotate($increment * $i * 2);
 				}
 			}
-			.inset .percentage .numbers {
-				width: $i * $percentage-text-width + $percentage-text-width;
-			}
+			// .inset .percentage .numbers {
+			// 	width: $i * $percentage-text-width + $percentage-text-width;
+			// }
 		}
 	}
 }

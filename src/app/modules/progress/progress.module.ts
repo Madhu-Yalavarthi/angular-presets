@@ -9,6 +9,7 @@ import { CanvasCircularComponent } from './canvas-circular/canvas-circular.compo
 import { RadialCircularComponent } from './radial-circular/radial-circular.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
+import { BasicCircularComponent } from './basic-circular/basic-circular.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MaterialModule } from 'src/app/material.module';
     HorizontalComponent,
     ProgressComponent,
     CanvasCircularComponent,
-    RadialCircularComponent
+    RadialCircularComponent,
+    BasicCircularComponent
   ],
   imports: [
     CommonModule,

@@ -34,10 +34,10 @@ export class CanvasCircularComponent implements OnInit, AfterViewInit, OnChanges
     // }
 
     const ctx = this.canvas.getContext('2d');
-    this.renderer.setAttribute(this.canvas, 'width', `${options.size}`);
-    this.renderer.setAttribute(this.canvas, 'height', `${options.size}`);
-    // this.canvas.width = options.size;
-    // this.canvas.height = options.size
+    // this.renderer.setAttribute(this.canvas, 'width', `${options.size}`);
+    // this.renderer.setAttribute(this.canvas, 'height', `${options.size}`);
+    this.canvas.width = options.size;
+    this.canvas.height = options.size
 
     el.appendChild(this.span);
     el.appendChild(this.canvas);
