@@ -1,9 +1,9 @@
 .progress-panel{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  width: 230px;
-  height: 230px;
+  padding: 1em;
+  min-height: 200px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
               0 8px 10px 1px rgba(0, 0, 0, 0.14),
               0 3px 14px 2px rgba(0, 0, 0, 0.12);
@@ -21,7 +21,7 @@
 	$percentage-font-size: 22px;
 	$percentage-text-width: 57px;
 
-	margin: 50px;
+	margin: 1em;
 	width: $circle-size;
 	height: $circle-size;
 
