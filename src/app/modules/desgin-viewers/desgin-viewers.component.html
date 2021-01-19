@@ -1,0 +1,17 @@
+<!-- <router-outlet></router-outlet> -->
+<div class="app-wrapper">
+  <div class="app-container">
+    <div class="header">
+      <span class="input-name">Progess value: </span>
+      <mat-form-field appearance="outline">
+        <mat-label>{{'Progress'}}</mat-label>
+        <input matInput type="number" [(ngModel)]="progress" min="0" max="100" step="1">
+      </mat-form-field>
+    </div>
+    <div class="content">
+      <app-canvas-circular-proggress [progress]="progress"></app-canvas-circular-proggress>
+      <app-radial-proggress-scss [progress]="progress"></app-radial-proggress-scss>
+    </div>
+
+  </div>
+</div>

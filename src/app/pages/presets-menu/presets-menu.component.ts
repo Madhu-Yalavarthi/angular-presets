@@ -10,7 +10,8 @@ export class PresetsMenuComponent implements OnInit {
     { name: 'Carousel', route: '/carousel' },
     { name: 'Background', route: '/background' },
     { name: 'Media Viewer', route: '/media-viewer' },
-    { name: 'Drag & Drop', route: '/drag-drop' }
+    { name: 'Drag & Drop', route: '/drag-drop' },
+    { name: 'Progress Bar', route: '/progress' }
   ]
   constructor() { }
 
