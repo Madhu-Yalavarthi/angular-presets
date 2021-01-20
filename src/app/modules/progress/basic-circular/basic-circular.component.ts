@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-basic-circular',
@@ -7,9 +7,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BasicCircularComponent implements OnInit {
   @Input('progress') progress: number = 0;
-  constructor() { }
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
   }
+
 
 }

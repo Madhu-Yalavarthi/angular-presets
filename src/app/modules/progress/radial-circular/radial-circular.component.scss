@@ -1,112 +1,101 @@
-.progress-panel{
+.progress-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1em;
   min-height: 200px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  span {
+    margin-bottom: 1em;
+  }
 }
 
 .radial-progress {
-	$circle-size: 120px;
-	$circle-background: #d6dadc;
-	$circle-color: #97a71d;
-	$inset-size: 90px;
-	$inset-color: #fbfbfb;
-	$transition-length: 1s;
-	$shadow: 6px 6px 10px rgba(0,0,0,0.2);
-	$percentage-color: #97a71d;
-	$percentage-font-size: 22px;
-	$percentage-text-width: 57px;
+  $inset-size: 90px;
+  $circle-background: #d6dadc;
+  $circle-color: #97a71d;
+  background-color: $circle-background;
+  $circle-size: 120px;
+  width: $circle-size;
+  height: $circle-size;
+  border-radius: 50%;
+  $shadow: 6px 6px 10px rgba(0, 0, 0, 0.2);
 
-	margin: 1em;
-	width: $circle-size;
-	height: $circle-size;
+  .inner-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: $inset-size;
+    height: $inset-size;
+    border-radius: 50%;
+    background-color: #fff;
+    margin: ($circle-size - $inset-size)/2;
+    box-shadow: $shadow;
+    span {
+      margin: ($circle-size - $inset-size)/2;
+      color: $circle-color;
+      font-weight: 500;
+      font-size: 20px;
+    }
+  }
+  .circle {
+    box-shadow: $shadow inset;
+    .shadow {
+      width: $circle-size;
+      height: $circle-size;
+      position: absolute;
+      border-radius: 50%;
+      box-shadow: $shadow inset;
+    }
+    .mask,
+    .fill {
+      position: absolute;
+      width: $circle-size;
+      height: $circle-size;
+      transition: transform 0.5s ease-out;
+      backface-visibility: hidden;
+      border-radius: 50%;
+    }
+    .mask {
+      background-color: transparent;
+      .fill {
+        background-color: $circle-color;
+      }
+    }
+    .mask {
+      // transform: rotate(180deg);
+      // clip: rect(0px, $circle-size, $circle-size, $circle-size/2);
+      clip-path: polygon(50% 0, 100% 0%, 100% 100%, 50% 100%);
+      .fill {
+        // clip: rect(0px, $circle-size/2, $circle-size, 0px);
+        clip-path: polygon(0 0, 50% 0%, 50% 100%, 0 100%);
+      }
+    }
 
-	background-color: $circle-background;
-	border-radius: 50%;
-	.circle {
-		.mask, .fill, .shadow {
-			width: $circle-size;
-			height: $circle-size;
-			position: absolute;
-			border-radius: 50%;
-		}
-		.shadow {
-			box-shadow: $shadow inset;
-		}
-		.mask, .fill {
-			backface-visibility: hidden;
-			transition: transform $transition-length;
-			transition: -ms-transform $transition-length;
-			transition: transform $transition-length;
-			border-radius: 50%;
-		}
-		.mask {
-			clip: rect(0px, $circle-size, $circle-size, $circle-size/2);
-			.fill {
-				clip: rect(0px, $circle-size/2, $circle-size, 0px);
-				background-color: $circle-color;
-			}
-		}
-	}
-	.inset {
-		width: $inset-size;
-		height: $inset-size;
-		position: absolute;
-		margin-left: ($circle-size - $inset-size)/2;
-		margin-top: ($circle-size - $inset-size)/2;
+    // .mask.right {
+    //   // clip: rect(0px, $circle-size/2, $circle-size, 0px);
+    //   clip-path: polygon(0 0, 50% 0%, 50% 100%, 0 100%);
+    //   .fill {
+    //     // clip: rect(0px, $circle-size, $circle-size, $circle-size/2);
+    //     clip-path: polygon(50% 0, 100% 0%, 100% 100%, 50% 100%);
+    //   }
+    // }
+  }
 
-		background-color: $inset-color;
-		border-radius: 50%;
-		box-shadow: $shadow;
-		.percentage {
-			height: $percentage-font-size;
-			width: $percentage-text-width;
-			overflow: hidden;
+  $one-percent: 180deg / 100;
+  @for $i from 0 through 100 {
+    &[data-progress="#{$i}"] {
+      .circle {
+        .mask.full,
+        .fill {
+          transform: rotate($one-percent * $i);
+        }
 
-			position: absolute;
-			top: ($inset-size - $percentage-font-size) / 2;
-			left: ($inset-size - $percentage-text-width) / 2;
-
-			line-height: 1;
-			.numbers {
-				// margin-top: -$percentage-font-size;
-				transition: width $transition-length;
-				span {
-					width: $percentage-text-width;
-					display: inline-block;
-					vertical-align: top;
-					text-align: center;
-					font-weight: 500;
-					font-size: $percentage-font-size;
-					/*font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
-					color: $percentage-color;
-				}
-			}
-		}
-	}
-
-	$increment: 180deg / 100;
-	@for $i from 0 through 100 {
-		&[data-progress="#{$i}"] {
-			.circle {
-				.mask.full, .fill {
-					-webkit-transform: rotate($increment * $i);
-					-ms-transform: rotate($increment * $i);
-					transform: rotate($increment * $i);
-				}
-				.fill.fix {
-					-webkit-transform: rotate($increment * $i * 2);
-					-ms-transform: rotate($increment * $i * 2);
-					transform: rotate($increment * $i * 2);
-				}
-			}
-			// .inset .percentage .numbers {
-			// 	width: $i * $percentage-text-width + $percentage-text-width;
-			// }
-		}
-	}
+        .fill.fix {
+          transform: rotate($one-percent * $i * 2);
+        }
+      }
+    }
+  }
 }
