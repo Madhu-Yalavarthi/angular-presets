@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { BasicCircularComponent } from './basic-circular/basic-circular.component';
 import { DiscountCardComponent } from './discount-card/discount-card.component';
+import { BasicHzComponent } from './basic-hz/basic-hz.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DiscountCardComponent } from './discount-card/discount-card.component';
     CanvasCircularComponent,
     RadialCircularComponent,
     BasicCircularComponent,
-    DiscountCardComponent
+    DiscountCardComponent,
+    BasicHzComponent
   ],
   imports: [
     CommonModule,
