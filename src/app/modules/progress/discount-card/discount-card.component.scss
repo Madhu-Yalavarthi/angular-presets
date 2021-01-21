@@ -1,0 +1,62 @@
+.progress-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  min-width: 120px;
+  min-height: 200px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+  span {
+    margin-bottom: 1em;
+  }
+}
+
+.discount-card-container {
+  $card-size: 120px;
+  $back-card-color: #f7cf6b;
+  $main-card-color: #ff0000;
+  $shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  position: relative;
+  width: $card-size;
+  height: $card-size;
+
+  .back-card {
+    background-color: $back-card-color;
+    transform: rotate(-15deg);
+  }
+
+  .main-card {
+    background-color: $main-card-color;
+    // box-shadow: $shadow;
+  }
+
+  .back-card,
+  .main-card {
+    position: absolute;
+    width: $card-size;
+    height: $card-size;
+    clip-path: polygon(0 0, 100% 14%, 100% 75%, 20% 100%);
+    border-radius: 38%;
+  }
+
+  .main-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .offerCount {
+      font-size: 35px;
+      font-weight: 500;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .offerCount.right {
+      font-size: 18px;
+      margin-left: 2em;
+    }
+  }
+}

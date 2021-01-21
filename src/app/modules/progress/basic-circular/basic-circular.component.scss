@@ -1,5 +1,3 @@
-
-
 .progress-panel {
   position: relative;
   display: flex;
@@ -15,76 +13,37 @@
   }
 }
 
-.arc1 {
-  width: 160px;
-  height: 160px;
-  background: #00a0db;
-  transform: translate(60px, -20px);
-  // transform-origin: -31% 61%;
-  // margin-left: -30px;
-  // margin-top: 20px;
-  // transform: translate(-54px, 50px);
-}
-.arc2 {
-  width: 160px;
-  height: 160px;
-  background: #00a0db;
-  transform: translate(-100px, -20px);
-  // transform: skew(45deg, 0deg);
-  // margin-left: -180px;
-  // margin-top: -90px;
-  position: absolute;
-  transition: all 0.5s linear;
-}
+.guarrenty {
+  $content-size: 120px;
+  $content-color:  #db4c4c;
+  width: $content-size;
+  height: $content-size;
+  clip-path: polygon(50% 0%, 100% 20%, 81% 68%, 50% 100%, 50% 100%, 19% 68%, 0 20%);
+  background-color: $content-color;
+  padding: 0.3em;
 
-.arc-container:hover {
-  .arc2 {
-    margin-left: -50px;
-    transform: skew(-20deg, 0deg);
+  .inner-card {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    clip-path: polygon(50% 0%, 100% 20%, 81% 68%, 50% 100%, 50% 100%, 19% 68%, 0 20%);
+    padding: 0.3em;
+    box-sizing: border-box;
+
+    .card-container {
+      width: 100%;
+      height: 100%;
+      background-color: $content-color;
+      clip-path: polygon(50% 0%, 100% 20%, 81% 68%, 50% 100%, 50% 100%, 19% 68%, 0 20%);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      span {
+        font-size: 22px;
+        color: #fff;
+      }
+    }
   }
-}
-
-.arc-wrapper {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: #424242;
-  overflow: hidden;
-  // left: 50px;
-  // top: 50px;
-  position: absolute;
-}
-.arc-hider {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 0px solid #e9e9e9;
-  position: absolute;
-  z-index: 5;
-  box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.2);
-}
-
-.arc-overlay {
-  text-align: center;
-  width: 90px;
-  height: 90px;
-  background-color: #fff;
-  box-sizing: border-box;
-  line-height: 100px;
-  font-family: sans-serif;
-  font-weight: 400;
-  text-shadow: 0 1px 0 #fff;
-  font-size: 22px;
-  border-radius: 100px;
-  position: absolute;
-  z-index: 5;
-  top: 15px;
-  left: 15px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
-}
-.arc-container {
-  position: relative;
-  background: #e9e9e9;
-  height: 100%;
-  width: 100%;
 }

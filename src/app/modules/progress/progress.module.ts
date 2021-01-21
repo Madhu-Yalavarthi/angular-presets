@@ -10,6 +10,7 @@ import { RadialCircularComponent } from './radial-circular/radial-circular.compo
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { BasicCircularComponent } from './basic-circular/basic-circular.component';
+import { DiscountCardComponent } from './discount-card/discount-card.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { BasicCircularComponent } from './basic-circular/basic-circular.componen
     ProgressComponent,
     CanvasCircularComponent,
     RadialCircularComponent,
-    BasicCircularComponent
+    BasicCircularComponent,
+    DiscountCardComponent
   ],
   imports: [
     CommonModule,
