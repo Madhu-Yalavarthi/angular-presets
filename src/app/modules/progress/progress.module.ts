@@ -12,6 +12,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { BasicCircularComponent } from './basic-circular/basic-circular.component';
 import { DiscountCardComponent } from './discount-card/discount-card.component';
 import { BasicHzComponent } from './basic-hz/basic-hz.component';
+import { PointerHzComponent } from './pointer-hz/pointer-hz.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { BasicHzComponent } from './basic-hz/basic-hz.component';
     RadialCircularComponent,
     BasicCircularComponent,
     DiscountCardComponent,
-    BasicHzComponent
+    BasicHzComponent,
+    PointerHzComponent
   ],
   imports: [
     CommonModule,
