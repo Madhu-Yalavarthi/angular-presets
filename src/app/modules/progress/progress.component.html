@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<div class="app-wrapper">
+  <div class="app-container">
+    <div class="options">
+      <a class="option" *ngFor="let option of options" [routerLink]="option.route"
+        routerLinkActive="active">{{option.name}}</a>
+    </div>
+    <div class="router-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

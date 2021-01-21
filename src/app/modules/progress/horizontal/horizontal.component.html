@@ -1,16 +1,14 @@
-<div class="app-wrapper">
-  <div class="app-container">
-    <div class="header">
-      <span class="input-name">{{'Progess value: '}}</span>
-      <mat-form-field appearance="outline">
-        <mat-label>{{'Progress'}}</mat-label>
-        <input matInput type="number" [(ngModel)]="progress" min="0" max="100" step="1">
-      </mat-form-field>
-    </div>
-    <div class="content">
-      <app-basic-hz class="pg-w" [progress]="progress"></app-basic-hz>
-      <app-pointer-hz class="pg-w" [progress]="progress"></app-pointer-hz>
-    </div>
-
+<div class="app-container">
+  <div class="header">
+    <span class="input-name">{{'Progess value: '}}</span>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'Progress'}}</mat-label>
+      <input matInput type="number" [(ngModel)]="progress" min="0" max="100" step="1">
+    </mat-form-field>
   </div>
+  <div class="content">
+    <app-basic-hz class="pg-w" [progress]="progress"></app-basic-hz>
+    <app-pointer-hz class="pg-w" [progress]="progress"></app-pointer-hz>
+  </div>
+
 </div>

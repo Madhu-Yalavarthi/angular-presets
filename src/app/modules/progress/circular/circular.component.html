@@ -1,18 +1,16 @@
-<div class="app-wrapper">
-  <div class="app-container">
-    <div class="header">
-      <span class="input-name">{{'Progess value: '}}</span>
-      <mat-form-field appearance="outline">
-        <mat-label>{{'Progress'}}</mat-label>
-        <input matInput type="number" [(ngModel)]="progress" min="0" max="100" step="1">
-      </mat-form-field>
-    </div>
-    <div class="content">
-      <app-basic-circular [progress]="progress"></app-basic-circular>
-      <app-canvas-circular [progress]="progress"></app-canvas-circular>
-      <app-radial-circular [progress]="progress"></app-radial-circular>
-      <app-discount-card [progress]="progress"></app-discount-card>
-    </div>
-
+<div class="app-container">
+  <div class="header">
+    <span class="input-name">{{'Progess value: '}}</span>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'Progress'}}</mat-label>
+      <input matInput type="number" [(ngModel)]="progress" min="0" max="100" step="1">
+    </mat-form-field>
   </div>
+  <div class="content">
+    <app-canvas-circular [progress]="progress"></app-canvas-circular>
+    <app-radial-circular [progress]="progress"></app-radial-circular>
+    <app-discount-card [progress]="progress"></app-discount-card>
+    <app-basic-circular [progress]="progress"></app-basic-circular>
+  </div>
+
 </div>
