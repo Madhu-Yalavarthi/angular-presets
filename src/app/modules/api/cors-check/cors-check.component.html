@@ -1,0 +1,37 @@
+<div class="cors-container">
+    <div class="input-container">
+        <div class="url-link">
+            <mat-form-field appearance="outline">
+                <mat-label>Enter Api url..</mat-label>
+                <input matInput type="url" placeholder="Enter Api url.." [(ngModel)]="url">
+            </mat-form-field>
+        </div>
+        <div class="option-method">
+            <mat-form-field appearance="outline" >
+                <mat-label>Select me</mat-label>
+                <mat-select [(ngModel)]="method">
+                    <mat-option value="get">GET</mat-option>
+                    <mat-option value="post">POST</mat-option>
+                    <mat-option value="put">PUT</mat-option>
+                    <mat-option value="patch">PATCH</mat-option>
+                    <mat-option value="delete">DELETE</mat-option>
+                </mat-select>
+                <!-- <mat-hint align="end">Here's the dropdown arrow ^</mat-hint> -->
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="request-body" *ngIf="method === 'post' || method === 'put' || method === 'patch'">
+        <mat-form-field appearance="outline" >
+            <mat-label>Enter body</mat-label>
+            <textarea matInput name="" id="" cols="30" rows="10" [(ngModel)]="body"></textarea>
+        </mat-form-field>
+    </div>
+    <div class="result-info">
+        <p *ngIf="response">{{response}}</p>
+        <p *ngIf="error">{{error}}</p>
+    </div>
+    <div class="action">
+        <button mat-raised-button class="submit-btn" [disabled]="url ? false : true"
+            (click)="fetchAPI()">Submit</button>
+    </div>
+</div>

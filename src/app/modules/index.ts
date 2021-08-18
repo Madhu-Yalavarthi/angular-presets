@@ -1,3 +1,4 @@
+import { ApiModule } from "./api/api.module";
 import { BackgroundModule } from "./background/background.module";
 import { CarouselModule } from "./carousel/carousel.module";
 import { DragDropModule } from "./drag-drop/drag-drop.module";
@@ -8,5 +9,6 @@ export const MODULES: any[] = [
   CarouselModule,
   DragDropModule,
   MediaViewerModule,
-  BackgroundModule
+  BackgroundModule,
+  ApiModule
 ]

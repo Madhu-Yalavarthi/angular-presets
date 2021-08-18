@@ -1,0 +1,31 @@
+.cors-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+
+  .input-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .url-link {
+      width: calc(100% - 100px);
+    }
+    .option-method {
+      width: 100px;
+    }
+  }
+  .result-info {
+    padding: 1em;
+    background: rgba(190, 190, 190, 0.5);
+  }
+
+  .action,
+  .result-info {
+    margin-bottom: 1em;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
